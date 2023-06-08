@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RideShare.Application.UseCaseHandling;
 using RideShare.Application.UseCaseHandling.Command;
 using RideShare.Application.UseCaseHandling.Query;
@@ -15,6 +16,7 @@ namespace RideShare.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BrandController : ControllerBase
     {
         private readonly IQueryHandler _queryHandler;

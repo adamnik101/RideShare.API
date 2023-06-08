@@ -69,10 +69,7 @@ namespace RideShare.Implementation.UseCases.Queries
             {
                 return dataToken.ToObject<Dictionary<string, string>>();
             }
-            else
-            {
-                return dataToken.Value<int>();
-            }
+            return dataToken.Value<int>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RideShare.Application.UseCaseHandling.Query;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
@@ -7,6 +8,7 @@ using RideShare.Application.UseCases.Queries.Searches;
 
 namespace RideShare.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UseCaseLogsController : ControllerBase

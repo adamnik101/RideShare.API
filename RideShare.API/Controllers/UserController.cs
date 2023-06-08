@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RideShare.Application.UseCaseHandling.Command;
 using RideShare.Application.UseCaseHandling.Query;
 using RideShare.Application.UseCases.Commands.Create;
@@ -11,6 +12,7 @@ namespace RideShare.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly ICommandHandler _commandHandler;
@@ -29,6 +31,7 @@ namespace RideShare.API.Controllers
             return Ok();
         }
         // GET: api/user/1/cars>
+
         [HttpGet("{id}/cars")]
         public IActionResult GetUserCars(int id, [FromServices] IReadUserCarsQuery query)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RideShare.Application.UseCaseHandling.Command;
 using RideShare.Application.UseCaseHandling.Query;
 using RideShare.Application.UseCases.Commands.Create;
@@ -40,6 +41,7 @@ namespace RideShare.API.Controllers
 
         // POST api/<RideController>
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] CreateRideDto data, [FromServices] ICreateRideCommand command)
         {
             _commandHandler.HandleCommand(command, data);
@@ -54,6 +56,7 @@ namespace RideShare.API.Controllers
 
         // DELETE api/<RideController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id, [FromServices] IDeleteRideCommand command)
         {
             _commandHandler.HandleCommand(command, id);

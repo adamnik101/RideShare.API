@@ -111,7 +111,17 @@ namespace RideShare.API
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
             services.addJWT(appSettings);
             services.addValidators();
-            services.AddTransient<IQueryHandler, QueryHandler>();
+            services.AddTransient<IQueryHandler>(x =>
+            {
+                var actor = x.GetService<IApplicationActor>();
+                var logger = x.GetService<IUseCaseLogger>();
+                var queryHandler = new QueryHandler();
+                var timeTrackingHandler = new TimeTrackingQueryHandler(queryHandler);
+                var loggingHandler = new LoggingQueryHandler(timeTrackingHandler, actor, logger);
+                var decoration = new AuthorizationQueryHandler(actor, loggingHandler);
+
+                return decoration;
+            });
             services.AddTransient<ICommandHandler, CommandHandler>();
             services.AddTransient<IUseCaseLogger, EfUseCaseLogger>();
             
@@ -184,9 +194,13 @@ namespace RideShare.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RideShare.API v1"));
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
