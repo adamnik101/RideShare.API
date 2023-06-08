@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RideShare.Implementation.Validators
 {
-    public class SearchUseCaseValidator : AbstractValidator<SearchUseCaseLogDto>
+    public class SearchUseCaseValidator : AbstractValidator<SearchUseCaseLog>
     {
         public SearchUseCaseValidator() 
         {
@@ -20,7 +20,7 @@ namespace RideShare.Implementation.Validators
             RuleFor(x => x.DateTo).NotEmpty().WithMessage("Date to is required.");
         }
 
-        protected bool DateDiffLessThan10Days(SearchUseCaseLogDto search, DateTime? dateFrom)
+        protected bool DateDiffLessThan10Days(SearchUseCaseLog search, DateTime? dateFrom)
         {
             if(!search.DateTo.HasValue)
             {

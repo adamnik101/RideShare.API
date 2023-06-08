@@ -1,11 +1,14 @@
 ﻿using FluentValidation;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RideShare.Application;
+using RideShare.Application.UseCases.DTOs;
 using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
+using RideShare.Implementation.Extensions;
 using RideShare.Implementation.Validators;
 using System;
 using System.Collections.Generic;
@@ -30,7 +33,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public string Name => "Read use case logs using Entity Framework";
 
-        public IEnumerable<ReadUseCaseLogDto> Execute(SearchUseCaseLogDto search)
+        public PagedResponse<ReadUseCaseLogDto> Execute(SearchUseCaseLog search)
         {
             _validator.ValidateAndThrow(search);
 
@@ -51,17 +54,25 @@ namespace RideShare.Implementation.UseCases.Queries
                 query = query.Where(x => x.CreatedAt < search.DateTo);
             }
             
-            var logs = query.Select(x => new ReadUseCaseLogDto
+            return query.ToPagedResponse(search, x => new ReadUseCaseLogDto
             {
                 Id = x.Id,
                 UseCaseName = x.UseCaseName,
                 UserId = x.ActorId,
-                ExecutedAt = x.CreatedAt
-                //Data = JsonConvert.DeserializeObject<Dictionary<string, string>>(x.UseCaseData)
-
-            }).ToList();
-
-            return logs;
+                ExecutedAt = x.CreatedAt,
+                Data = DeserializeUseCaseData(JToken.Parse(x.UseCaseData))
+            });
+        }
+        private static object DeserializeUseCaseData(JToken dataToken)
+        {
+            if (dataToken.Type == JTokenType.Object)
+            {
+                return dataToken.ToObject<Dictionary<string, string>>();
+            }
+            else
+            {
+                return dataToken.Value<int>();
+            }
         }
     }
 }

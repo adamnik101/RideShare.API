@@ -1,4 +1,5 @@
-﻿using RideShare.Application.UseCases.DTOs.Read;
+﻿using RideShare.Application.UseCases.DTOs;
+using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries.Searches;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RideShare.Application.UseCases.Queries
 {
-    public interface IReadUseCaseLogsQuery : IQuery<SearchUseCaseLogDto, IEnumerable<ReadUseCaseLogDto>>
+    public interface IReadUseCaseLogsQuery : IQuery<SearchUseCaseLog, PagedResponse<ReadUseCaseLogDto>>
     {
     }
 }

@@ -26,7 +26,7 @@ namespace RideShare.API.Controllers
 
         // GET: api/<TypeController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchNameDto data, [FromServices] IReadTypesQuery query)
+        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadTypesQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, data));
         }

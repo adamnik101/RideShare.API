@@ -23,7 +23,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public string Name => "Read colors using Entity Framework";
 
-        public IEnumerable<ReadColorDto> Execute(SearchNameDto search)
+        public IEnumerable<ReadColorDto> Execute(SearchName search)
         {
             var query = _context.Colors.AsQueryable();
             

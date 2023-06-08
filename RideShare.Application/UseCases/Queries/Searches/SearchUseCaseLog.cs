@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RideShare.Application.UseCases.Queries.Searches
 {
-    public class SearchUseCaseLogDto
+    public class SearchUseCaseLog : PagedSearch
     {
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }

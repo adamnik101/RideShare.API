@@ -23,7 +23,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public string Name => "Read models using Entity Framework";
 
-        public IEnumerable<ReadModelDto> Execute(SearchNameDto search)
+        public IEnumerable<ReadModelDto> Execute(SearchName search)
         {
             var query = _context.Models.AsQueryable();
 

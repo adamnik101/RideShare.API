@@ -1,7 +1,9 @@
-﻿using RideShare.Application.UseCases.DTOs.Read;
+﻿using RideShare.Application.UseCases.DTOs;
+using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
 using RideShare.DataAccess;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public string Name => "Read car types using Entity Framework";
 
-        public IEnumerable<ReadTypeDto> Execute(SearchNameDto search)
+        public PagedResponse<ReadTypeDto> Execute(SearchName search)
         {
             var query = _context.Types.AsQueryable();
 
@@ -32,13 +34,7 @@ namespace RideShare.Implementation.UseCases.Queries
                 query = query.Where(x => x.Name.ToLower().Contains(search.Name.ToLower()));
             }
 
-            var brands = query.Select(x => new ReadTypeDto
-            {
-                Name = x.Name
-            }).ToList();
-
-            return brands;
-
+           return query.ToPagedResponse(search, x => new ReadTypeDto { Name = x.Name });
         }
     }
 }

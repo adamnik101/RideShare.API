@@ -20,7 +20,7 @@ namespace RideShare.API.Controllers
 
         // GET: api/<UseCaseLogsController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchUseCaseLogDto data, [FromServices] IReadUseCaseLogsQuery query)
+        public IActionResult Get([FromQuery] SearchUseCaseLog data, [FromServices] IReadUseCaseLogsQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, data));
         }

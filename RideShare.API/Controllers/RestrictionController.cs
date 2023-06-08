@@ -26,7 +26,7 @@ namespace RideShare.API.Controllers
 
         // GET: api/<RestrictionController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchNameDto data, [FromServices] IReadRestrictionQuery query)
+        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadRestrictionQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, data));
         }

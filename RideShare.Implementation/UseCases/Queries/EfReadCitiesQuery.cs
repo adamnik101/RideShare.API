@@ -23,7 +23,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public string Name => "Read cities using Entity Framework";
 
-        public IEnumerable<ReadCityDto> Execute(SearchNameDto search)
+        public IEnumerable<ReadCityDto> Execute(SearchName search)
         {
             var query = _context.Cities.AsQueryable();
 

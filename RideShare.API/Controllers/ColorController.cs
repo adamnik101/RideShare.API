@@ -26,7 +26,7 @@ namespace RideShare.API.Controllers
 
         // GET: api/<ColorController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchNameDto data, [FromServices] IReadColorsQuery query)
+        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadColorsQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, data));
         }

@@ -28,7 +28,7 @@ namespace RideShare.API.Controllers
 
         // GET: api/<BrandController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchNameDto data, [FromServices] IReadBrandsQuery query)
+        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadBrandsQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, data));
         }

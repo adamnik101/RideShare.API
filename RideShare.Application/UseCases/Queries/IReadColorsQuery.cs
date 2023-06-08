@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RideShare.Application.UseCases.Queries
 {
-    public interface IReadColorsQuery : IQuery<SearchNameDto, IEnumerable<ReadColorDto>>
+    public interface IReadColorsQuery : IQuery<SearchName, IEnumerable<ReadColorDto>>
     {
     }
 }
