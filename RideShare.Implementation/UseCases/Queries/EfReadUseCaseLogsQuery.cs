@@ -39,7 +39,12 @@ namespace RideShare.Implementation.UseCases.Queries
 
             var query = _context.LogEntries.AsQueryable();
 
-            if(search.UseCaseName != null)
+            if (search.Actor != null)
+            {
+                query = query.Where(x => x.Actor.ToLower().Contains(search.Actor));
+            }
+
+            if (search.UseCaseName != null)
             {
                 query = query.Where(x => x.UseCaseName.ToLower().Contains(search.UseCaseName.ToLower()));
             }
@@ -58,7 +63,7 @@ namespace RideShare.Implementation.UseCases.Queries
             {
                 Id = x.Id,
                 UseCaseName = x.UseCaseName,
-                UserId = x.ActorId,
+                Actor = x.Actor,
                 ExecutedAt = x.CreatedAt,
                 Data = DeserializeUseCaseData(JToken.Parse(x.UseCaseData))
             });

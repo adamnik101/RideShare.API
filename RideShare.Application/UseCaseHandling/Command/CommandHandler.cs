@@ -30,7 +30,6 @@ namespace RideShare.Application.UseCaseHandling.Command
             _logger.Add(new UseCaseLogEntry
             {
                 Actor = _actor.Fullname,
-                ActorId = _actor.Id,
                 UseCaseName = command.Name,
                 Data = data
             });

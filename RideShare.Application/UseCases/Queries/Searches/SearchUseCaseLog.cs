@@ -11,6 +11,6 @@ namespace RideShare.Application.UseCases.Queries.Searches
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
         public string UseCaseName { get; set; }
-        public string Fullname { get; set; }
+        public string Actor { get; set; }
     }
 }

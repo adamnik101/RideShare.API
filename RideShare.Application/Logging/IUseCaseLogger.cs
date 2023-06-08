@@ -13,7 +13,6 @@ namespace RideShare.Application.Logging
     public class UseCaseLogEntry
     {
         public string Actor { get; set; }
-        public int ActorId { get; set; }
         public object Data { get; set; }
         public string UseCaseName { get; set; }
     }

@@ -47,5 +47,6 @@ namespace RideShare.DataAccess
         public DbSet<CarRestriction> CarRestrictions { get; set; }
         public DbSet<RideRequest> RideRequests { get; set; }
         public DbSet<LogEntry> LogEntries { get; set; }
+        public DbSet<Ride> Rides { get; set; }
     }
 }

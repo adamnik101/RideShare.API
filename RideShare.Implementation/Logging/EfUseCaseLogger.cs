@@ -24,7 +24,7 @@ namespace RideShare.Implementation.Logging
             _context.LogEntries.Add(new LogEntry
             {
                 UseCaseData = JsonConvert.SerializeObject(entry.Data),
-                ActorId = entry.ActorId,
+                Actor = entry.Actor,
                 UseCaseName = entry.UseCaseName
             });
 
