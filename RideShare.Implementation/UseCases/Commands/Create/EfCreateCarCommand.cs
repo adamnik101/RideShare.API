@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using RideShare.Application;
+using RideShare.Application.Uploads;
 using RideShare.Application.UseCases.Commands.Create;
 using RideShare.Application.UseCases.DTOs.Create;
 using RideShare.DataAccess;
@@ -18,12 +19,13 @@ namespace RideShare.Implementation.UseCases.Commands.Create
         private readonly RideshareContext _context;
         private readonly CreateCarValidator _validator;
         private readonly IApplicationActor _actor;
-
-        public EfCreateCarCommand(RideshareContext context, CreateCarValidator validator, IApplicationActor actor)
+        private readonly IBase64FileUploader _uploader;
+        public EfCreateCarCommand(RideshareContext context, CreateCarValidator validator, IApplicationActor actor, IBase64FileUploader uploader)
         {
             _context = context;
             _validator = validator;
             _actor = actor;
+            _uploader = uploader;
         }
 
         public int Id => 18;
@@ -34,6 +36,8 @@ namespace RideShare.Implementation.UseCases.Commands.Create
         {
             _validator.ValidateAndThrow(request);
 
+            var imagePath = _uploader.Upload(request.Image);
+
             Car car = new Car
             {
                 ColorId = request.ColorId,
@@ -42,7 +46,8 @@ namespace RideShare.Implementation.UseCases.Commands.Create
                 LicencePlate = request.LicencePlate,
                 NumberOfSeats = request.NumberOfSeats,
                 OwnerId = _actor.Id,
-                TypeId = request.TypeId
+                TypeId = request.TypeId,
+                ImagePath = imagePath
             };
 
             _context.Cars.Add(car);

@@ -17,4 +17,8 @@
     <ProjectReference Include="..\RideShare.Implementation\RideShare.Implementation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\cars\" />
+  </ItemGroup>
+
 </Project>

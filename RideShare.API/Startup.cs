@@ -33,6 +33,8 @@ using RideShare.Application.UseCases.Queries;
 using RideShare.Implementation.UseCases.Queries;
 using RideShare.Implementation.UseCases.Commands.Delete;
 using RideShare.Application.UseCases.Commands.Delete;
+using RideShare.Application.Uploads;
+using RideShare.Implementation.Uploads;
 
 namespace RideShare.API
 {
@@ -177,7 +179,7 @@ namespace RideShare.API
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>(); // register user
             //logger
             services.AddTransient<IErrorLogger, ConsoleErrorLogger>();
-
+            services.AddTransient<IBase64FileUploader, Base64FileUploader>();
             //read user cars
             services.AddTransient<IReadUserCarsQuery, EfReadUserCarsQuery>();  
             services.AddTransient<IReadBrandModelsQuery, EfReadBrandModelsQuery>();  
@@ -197,7 +199,7 @@ namespace RideShare.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
             

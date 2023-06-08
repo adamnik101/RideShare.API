@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RideShare.DataAccess;
 
 namespace RideShare.DataAccess.Migrations
 {
     [DbContext(typeof(RideshareContext))]
-    partial class RideshareContextModelSnapshot : ModelSnapshot
+    [Migration("20230608202223_car image")]
+    partial class carimage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
