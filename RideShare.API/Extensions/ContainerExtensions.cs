@@ -25,6 +25,7 @@ namespace RideShare.API.Extensions
             services.AddTransient<CreateRestrictionValidator>();
             services.AddTransient<DeleteRestrictionValidator>();
             services.AddTransient<DeleteColorValidator>();
+            services.AddTransient<DeleteModelValidator>();
             services.AddTransient<SearchUseCaseValidator>();
         }
         public static void addJWT (this IServiceCollection services, AppSettings settings)
