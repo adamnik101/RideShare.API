@@ -27,7 +27,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public PagedResponse<ReadBrandDto> Execute(SearchName search)
         {
-            var query = _context.Brands.AsQueryable();
+            var query = _context.Brands.WhereActive().AsQueryable();
 
             if(search.Name != null)
             {

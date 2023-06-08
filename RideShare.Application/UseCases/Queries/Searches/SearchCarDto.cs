@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RideShare.Application.UseCases.Queries.Searches
 {
-    public class SearchCarDto
+    public class SearchCarDto : PagedSearch
     {
         public string Model { get; set; }
         public string Brand { get; set; }

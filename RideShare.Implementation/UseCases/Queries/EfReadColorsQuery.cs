@@ -1,7 +1,9 @@
-﻿using RideShare.Application.UseCases.DTOs.Read;
+﻿using RideShare.Application.UseCases.DTOs;
+using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
 using RideShare.DataAccess;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,21 +25,16 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public string Name => "Read colors using Entity Framework";
 
-        public IEnumerable<ReadColorDto> Execute(SearchName search)
+        public PagedResponse<ReadColorDto> Execute(SearchName search)
         {
-            var query = _context.Colors.AsQueryable();
+            var query = _context.Colors.WhereActive().AsQueryable();
             
             if(search.Name != null)
             {
                 query = query.Where(x => x.Name.ToLower().Contains(search.Name.ToLower()));
             }
 
-            var colors = query.Select(x => new ReadColorDto
-            {
-                Name = x.Name
-            }).ToList();
-
-            return colors;
+            return query.ToPagedResponse(search, x => new ReadColorDto { Name = x.Name });
         }
     }
 }

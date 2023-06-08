@@ -1,4 +1,5 @@
 ﻿using RideShare.Application.UseCases.Commands.Delete;
+using RideShare.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,16 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
 {
     public class EfDeleteCarCommand : IDeleteCarCommand
     {
-        public int Id => throw new NotImplementedException();
+        private readonly RideshareContext _context;
 
-        public string Name => throw new NotImplementedException();
+        public EfDeleteCarCommand(RideshareContext context)
+        {
+            _context = context;
+        }
+
+        public int Id => 800;
+
+        public string Name => "Delete car using Entity Framework";
 
         public void Execute(int request)
         {

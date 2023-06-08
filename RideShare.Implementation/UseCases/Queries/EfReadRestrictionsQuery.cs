@@ -26,7 +26,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public PagedResponse<ReadRestrictionDto> Execute(SearchName search)
         {
-            var query = _context.Restrictions.AsQueryable();
+            var query = _context.Restrictions.WhereActive().AsQueryable();
 
             if(search.Name != null)
             {

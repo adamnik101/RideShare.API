@@ -3,6 +3,7 @@ using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public ReadColorDto Execute(int search)
         {
-            var colorFound = _context.Colors.Find(search);
+            var colorFound = _context.Colors.WhereActive().FirstOrDefault(x => x.Id == search);
 
             if(colorFound == null)
             {

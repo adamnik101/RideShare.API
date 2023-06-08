@@ -4,6 +4,7 @@ using RideShare.Application.Exceptions;
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
+using RideShare.Implementation.Extensions;
 using RideShare.Implementation.Validators;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
             {
                 throw new DeleteOperationException($"Cannot delete color. Car with {color.Name} exists");
             }*/
-            var color = _context.Colors.Find(request);
+            var color = _context.Colors.WhereActive().FirstOrDefault(x => x.Id == request);
 
             color.IsDeleted = true;
             color.DeletedAt = DateTime.UtcNow;

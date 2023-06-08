@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace RideShare.Application.UseCases.Queries.Searches
 {
-    public class SearchRideDto
+    public class SearchRideDto : PagedSearch
     {
-        public DateTime? RideDate { get; set; }
-        public string DestinationCity { get; set; }
-        public string StartCity { get; set; }
+        public DateTime RideDate { get; set; }
+        public int DestinationCity { get; set; }
+        public int StartCity { get; set; }
     }
 }

@@ -15,50 +15,49 @@ namespace RideShare.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ColorController : ControllerBase
+    public class RestrictionsController : ControllerBase
     {
-        private readonly IQueryHandler _queryHandler;
         private readonly ICommandHandler _commandHandler;
+        private readonly IQueryHandler _queryHandler;
 
-        public ColorController(IQueryHandler queryHandler, ICommandHandler commandHandler)
+        public RestrictionsController(ICommandHandler commandHandler, IQueryHandler queryHandler)
         {
-            _queryHandler = queryHandler;
             _commandHandler = commandHandler;
+            _queryHandler = queryHandler;
         }
 
-        // GET: api/<ColorController>
+        // GET: api/<RestrictionController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadColorsQuery query)
+        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadRestrictionQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, data));
         }
 
-        // GET api/<ColorController>/5
+        // GET api/<RestrictionController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id, [FromServices] IFindColorQuery query)
+        public IActionResult Get(int id, [FromServices] IFindRestrictionQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, id));
         }
 
-        // POST api/<ColorController>
+        // POST api/<RestrictionController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateNameOnlyDto data, [FromServices] ICreateColorCommand command)
+        public IActionResult Post([FromBody] CreateNameOnlyDto data, [FromServices] ICreateRestrictionCommand command)
         {
             _commandHandler.HandleCommand(command, data);
             return StatusCode(201);
         }
 
-        // PUT api/<ColorController>/5
+        // PUT api/<RestrictionController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] string value)
         {
 
-            return Ok();
         }
 
-        // DELETE api/<ColorController>/5
+        // DELETE api/<RestrictionController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] IDeleteColorCommand command)
+        public IActionResult Delete(int id, [FromServices] IDeleteRestrictionCommand command)
         {
             _commandHandler.HandleCommand(command, id);
             return NoContent();

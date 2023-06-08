@@ -11,6 +11,6 @@ namespace RideShare.API.JWT
 
         public string Fullname => "Unauthorized actor";
 
-        public IEnumerable<int> AllowedUseCases => new List<int> { 99, 100, 101 }; // login, register, search rides
+        public IEnumerable<int> AllowedUseCases => new List<int> { 99, 100, 101, 301}; // login, register, search rides
     }
 }

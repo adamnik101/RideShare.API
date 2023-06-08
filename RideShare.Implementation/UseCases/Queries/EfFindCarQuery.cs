@@ -5,6 +5,7 @@ using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace RideShare.Implementation.UseCases.Queries
                                         .Include(x => x.Model)
                                             .ThenInclude(x => x.Brand)
                 .Where(x => x.OwnerId == _actor.Id)
+                .WhereActive()
                 .FirstOrDefault(x => x.Id == search);
 
             if (userCar == null)

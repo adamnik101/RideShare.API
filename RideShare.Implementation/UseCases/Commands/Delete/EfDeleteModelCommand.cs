@@ -3,6 +3,7 @@ using RideShare.Application.Exceptions;
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
+using RideShare.Implementation.Extensions;
 using RideShare.Implementation.Validators;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
         {
             _validator.ValidateAndThrow(request);
 
-            var model = _context.Models.Find(request);
+            var model = _context.Models.WhereActive().FirstOrDefault(x => x.Id == request);
 
             model.IsDeleted = true;
             model.DeletedAt = DateTime.UtcNow;

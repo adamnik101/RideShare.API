@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RideShare.Application;
+using RideShare.Application.UseCases.DTOs;
 using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
 using RideShare.DataAccess;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,14 +29,14 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public string Name => "Read user cars using Entity Framework";
 
-        public IEnumerable<ReadCarDto> Execute(SearchCarDto search)
+        public PagedResponse<ReadCarDto> Execute(SearchCarDto search)
         {
             var query = _context.Cars.Include(x => x.Owner)
                                          .Include(x => x.Color)
                                          .Include(x => x.Type)
                                          .Include(x => x.Model)
                                              .ThenInclude(x => x.Brand)
-                 .Where(x => x.OwnerId == _actor.Id).AsQueryable();
+                 .Where(x => x.OwnerId == _actor.Id).WhereActive().AsQueryable();
 
             if(search.Model != null)
             {
@@ -55,7 +57,8 @@ namespace RideShare.Implementation.UseCases.Queries
             {
                 query = query.Where(x => x.Color.Name.ToLower().Contains(search.Color.ToLower()));
             }
-            var cars = query.Select(x => new ReadCarDto
+
+            return query.ToPagedResponse(search, x => new ReadCarDto
             {
                 Owner = _actor.Fullname,
                 ModelBrand = x.Model.Name + " " + x.Model.Brand.Name,
@@ -65,8 +68,6 @@ namespace RideShare.Implementation.UseCases.Queries
                 FirstRegistration = x.FirstRegistration,
                 NumberOfSeats = x.NumberOfSeats
             });
-
-            return cars;
         }
     }
 }

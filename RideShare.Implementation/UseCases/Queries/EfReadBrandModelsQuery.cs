@@ -5,6 +5,7 @@ using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public IEnumerable<ReadModelDto> Execute(int search)
         {
-            var brand = _context.Brands.Where(x => x.Id == search).Include(x => x.Models).FirstOrDefault();
+            var brand = _context.Brands.Where(x => x.Id == search).WhereActive().Include(x => x.Models).FirstOrDefault();
 
             if(brand == null)
             {

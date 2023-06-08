@@ -12,11 +12,11 @@ namespace RideShare.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class GenderController : ControllerBase
+    public class GendersController : ControllerBase
     {
         private readonly IQueryHandler _queryHandler;
 
-        public GenderController(IQueryHandler queryHandler)
+        public GendersController(IQueryHandler queryHandler)
         {
             _queryHandler = queryHandler;
         }

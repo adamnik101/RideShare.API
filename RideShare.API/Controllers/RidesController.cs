@@ -14,12 +14,12 @@ namespace RideShare.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RideController : ControllerBase
+    public class RidesController : ControllerBase
     {
         private readonly IQueryHandler _queryHandler;
         private readonly ICommandHandler _commandHandler;
 
-        public RideController(IQueryHandler queryHandler, ICommandHandler commandHandler)
+        public RidesController(IQueryHandler queryHandler, ICommandHandler commandHandler)
         {
             _queryHandler = queryHandler;
             _commandHandler = commandHandler;

@@ -44,11 +44,7 @@ namespace RideShare.Implementation.UseCases.Commands.Create
             };
 
             _context.Cities.Add(city);
-            _context.SaveChanges();
-            //zavrsio si grad, modele i brendove. Ostalo ti je jos update za to sve
-            //napraviti komande za to
-            //onda odraditi paginaciju
-            //onda odraditi glavne funkcionalnosti
+            _context.SaveChanges();            
         }
     }
 }

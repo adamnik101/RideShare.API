@@ -2,6 +2,7 @@
 using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.DataAccess;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public ReadTypeDto Execute(int search)
         {
-            var typeExists = _context.Types.Find(search);
+            var typeExists = _context.Types.WhereActive().FirstOrDefault(x => x.Id == search);
             
             if (typeExists == null)
             {

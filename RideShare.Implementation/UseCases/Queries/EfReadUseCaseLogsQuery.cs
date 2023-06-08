@@ -37,7 +37,7 @@ namespace RideShare.Implementation.UseCases.Queries
         {
             _validator.ValidateAndThrow(search);
 
-            var query = _context.LogEntries.AsQueryable();
+            var query = _context.LogEntries.WhereActive().AsQueryable();
 
             if (search.Actor != null)
             {

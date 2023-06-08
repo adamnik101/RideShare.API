@@ -32,17 +32,6 @@ namespace RideShare.Implementation.UseCases.Commands.Create
         {
             _validator.ValidateAndThrow(request);
 
-            var modelExists = _context.Models.Any(x => x.Name == request.Name);
-            var brandExists = _context.Brands.Find(request.BrandId);
-            if(brandExists == null)
-            {
-                throw new EntityNotFoundException(request.BrandId, nameof(Brand));
-            }
-            if(modelExists)
-            {
-                throw new EntityAlreadyExistsException(request.Name, nameof(Model));
-            }
-
             Model model = new Model
             {
                 Name = request.Name,

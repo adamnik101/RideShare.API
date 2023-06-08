@@ -15,39 +15,39 @@ namespace RideShare.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CityController : ControllerBase
+    public class ModelsController : ControllerBase
     {
-        // GET: api/<CityController>
+        // GET: api/<ModelController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchName data, [FromServices] IQueryHandler handler, [FromServices] IReadCitiesQuery query)
+        public IActionResult Get([FromQuery] SearchName data, [FromServices] IQueryHandler handler, [FromServices] IReadModelsQuery query)
         {
             return Ok(handler.HandleQuery(query, data));
         }
 
-        // GET api/<CityController>/5
+        // GET api/<ModelController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id, [FromServices] IQueryHandler handler, [FromServices] IFindCityQuery query)
+        public IActionResult Get(int id, [FromServices] IQueryHandler handler, [FromServices] IFindModelQuery query)
         {
             return Ok(handler.HandleQuery(query, id));
         }
 
-        // POST api/<CityController>
+        // POST api/<ModelController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateNameOnlyDto data, [FromServices] ICommandHandler handler, [FromServices] ICreateCityCommand command)
+        public IActionResult Post([FromBody] CreateModelDto data, [FromServices] ICommandHandler handler, [FromServices] ICreateModelCommand command)
         {
             handler.HandleCommand(command, data);
             return StatusCode(201);
         }
 
-        // PUT api/<CityController>/5
+        // PUT api/<ModelController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<CityController>/5
+        // DELETE api/<ModelController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] ICommandHandler handler, [FromServices] IDeleteCityCommand command)
+        public IActionResult Delete(int id, [FromServices] ICommandHandler handler, [FromServices] IDeleteModelCommand command)
         {
             handler.HandleCommand(command, id);
             return NoContent();

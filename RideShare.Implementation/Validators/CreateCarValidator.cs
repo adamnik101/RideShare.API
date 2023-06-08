@@ -24,7 +24,7 @@ namespace RideShare.Implementation.Validators
             RuleFor(x => x.TypeId).NotEmpty().WithMessage("Type is required.")
                 .Must(y => context.Types.Any(x => x.Id == y)).WithMessage("Provided type does not exist.");
 
-            var licenceplateRegEx = @"^[A-Z]{2}-([0-9]){3,5}-[A-Z]{2}";
+            var licenceplateRegEx = @"^[A-ZŠŠĐČĆŽ]{2}-([0-9]){3,5}-[A-Z]{2}";
             RuleFor(x => x.LicencePlate).NotEmpty().WithMessage("Licence plate is required.")
                 .Matches(licenceplateRegEx).WithMessage("Licence plate is in wrong format. Example: BG-001-BG");
 

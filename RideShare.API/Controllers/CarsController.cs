@@ -15,49 +15,48 @@ namespace RideShare.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class RestrictionController : ControllerBase
+    public class CarsController : ControllerBase
     {
-        private readonly ICommandHandler _commandHandler;
         private readonly IQueryHandler _queryHandler;
+        private readonly ICommandHandler _commandHandler;
 
-        public RestrictionController(ICommandHandler commandHandler, IQueryHandler queryHandler)
+        public CarsController(IQueryHandler queryHandler, ICommandHandler commandHandler)
         {
-            _commandHandler = commandHandler;
             _queryHandler = queryHandler;
+            _commandHandler = commandHandler;
         }
 
-        // GET: api/<RestrictionController>
+        // GET: api/<CarController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadRestrictionQuery query)
+        public IActionResult Get([FromQuery] SearchCarDto data, [FromServices] IReadCarsQuery query)
         {
-            return Ok(_queryHandler.HandleQuery(query, data));
+            return Ok(_queryHandler.HandleQuery(query,data));
         }
 
-        // GET api/<RestrictionController>/5
+        // GET api/<CarController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id, [FromServices] IFindRestrictionQuery query)
+        public IActionResult Get(int id, [FromServices] IFindCarQuery query)
         {
-            return Ok(_queryHandler.HandleQuery(query, id));
+            return Ok(_queryHandler.HandleQuery(query,id));
         }
 
-        // POST api/<RestrictionController>
+        // POST api/<CarController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateNameOnlyDto data, [FromServices] ICreateRestrictionCommand command)
+        public IActionResult Post([FromBody] CreateCarDto data, [FromServices] ICreateCarCommand command)
         {
             _commandHandler.HandleCommand(command, data);
             return StatusCode(201);
         }
 
-        // PUT api/<RestrictionController>/5
+        // PUT api/<CarController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
-
         }
 
-        // DELETE api/<RestrictionController>/5
+        // DELETE api/<CarController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] IDeleteRestrictionCommand command)
+        public IActionResult Delete(int id, [FromServices] IDeleteCarCommand command)
         {
             _commandHandler.HandleCommand(command, id);
             return NoContent();

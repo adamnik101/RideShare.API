@@ -15,7 +15,9 @@ namespace RideShare.Implementation.Validators
         {
             RuleLevelCascadeMode = CascadeMode.Stop;
 
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Model name is required.");
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Model name is required.")
+                .Must(x => !context.Models.Any(z => z.Name == x)).WithMessage("Provided model already exists.");
+
 
             RuleFor(x => x.BrandId).NotEmpty().WithMessage("Brand is required.")
                 .Must(x => context.Brands.Any(y => y.Id == x)).WithMessage("Provided brand does not exist.");

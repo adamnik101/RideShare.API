@@ -2,6 +2,7 @@
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
 using RideShare.DataAccess;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public IEnumerable<ReadGenderDto> Execute(string search)
         {
-            return _context.Genders.Select(x => new ReadGenderDto {Id = x.Id, Name = x.Name});
+            return _context.Genders.WhereActive().Select(x => new ReadGenderDto {Id = x.Id, Name = x.Name});
         }
     }
 }

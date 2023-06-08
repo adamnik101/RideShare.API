@@ -2,6 +2,7 @@
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
 
         public void Execute(int request)
         {
-            var brandToDelete = _context.Brands.Find(request);
+            var brandToDelete = _context.Brands.WhereActive().FirstOrDefault(x => x.Id == request);
 
             if (brandToDelete == null)
             {

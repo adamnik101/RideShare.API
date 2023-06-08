@@ -3,6 +3,7 @@ using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
+using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
         public ReadRestrictionDto Execute(int search)
         {
-            var restriction = _context.Restrictions.Find(search);
+            var restriction = _context.Restrictions.WhereActive().FirstOrDefault(x => x.Id == search);
 
             if (restriction == null)
             {
