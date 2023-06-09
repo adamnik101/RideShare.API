@@ -4,6 +4,7 @@ using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
 using RideShare.DataAccess;
+using RideShare.Domain.Entities;
 using RideShare.Implementation.Extensions;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,8 @@ namespace RideShare.Implementation.UseCases.Queries
                             && x.StartDate.Year == search.RideDate.Year
                             && x.StartDate.Month == search.RideDate.Month
                             && x.StartDate.Day == search.RideDate.Day
-                            && x.StartDate > DateTime.Now)
+                            && x.StartDate > DateTime.Now
+                            && x.RideRequests.Count < x.Car.NumberOfSeats)
                 .WhereActive();
 
             return query.ToPagedResponse(search, x => new ReadRideDto
@@ -71,7 +73,8 @@ namespace RideShare.Implementation.UseCases.Queries
                     NumberOfSeats = x.Car.NumberOfSeats,
                     FirstRegistration = x.Car.FirstRegistration,
                     ImagePath = x.Car.ImagePath
-                }
+                },
+                NumberOfAvailableSeats = x.Car.NumberOfSeats - x.RideRequests.Count
             });
 
                                     

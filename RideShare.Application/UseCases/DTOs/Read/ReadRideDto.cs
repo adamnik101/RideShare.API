@@ -13,5 +13,6 @@ namespace RideShare.Application.UseCases.DTOs.Read
         public ReadDriverDto Driver { get; set; }
         public ReadDriverCarDto Car { get; set; }
         public DateTime StartDate { get; set; }
+        public int NumberOfAvailableSeats { get; set; }
     }
 }

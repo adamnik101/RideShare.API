@@ -27,6 +27,15 @@ namespace RideShare.API.Middleware
             {
                 await _next(context);
             }
+            catch(InvalidOperationException exception)
+            {
+                context.Response.StatusCode = 409;
+                var errors = new
+                {
+                    message = exception.Message.ToString(),
+                };
+                await context.Response.WriteAsJsonAsync(errors);
+            }
             catch(ValidationException exception)
             {
                 context.Response.StatusCode = 422;

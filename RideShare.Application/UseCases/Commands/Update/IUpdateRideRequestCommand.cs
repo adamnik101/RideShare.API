@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RideShare.Application.UseCases.DTOs.Create
+namespace RideShare.Application.UseCases.Commands.Update
 {
-    public class SendRequestDto
+    public interface IUpdateRideRequestCommand 
     {
-        public int RideId { get; set; }
     }
 }

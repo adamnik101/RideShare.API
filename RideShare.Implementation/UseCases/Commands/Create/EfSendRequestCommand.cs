@@ -29,13 +29,13 @@ namespace RideShare.Implementation.UseCases.Commands.Create
 
         public string Name => "Send a request for a ride using Entity Framework";
 
-        public void Execute(SendRequestDto request)
+        public void Execute(int id)
         {
-            var ride = _context.Rides.Include(x => x.RideRequests).Include(x => x.Car).WhereActive().FirstOrDefault(x => x.Id == request.RideId);
+            var ride = _context.Rides.Include(x => x.RideRequests).Include(x => x.Car).WhereActive().FirstOrDefault(x => x.Id == id && x.StartDate > DateTime.Now);
 
             if (ride == null)
             {
-                throw new EntityNotFoundException(request.RideId, nameof(Ride));
+                throw new EntityNotFoundException(id, nameof(Ride));
             }
 
             if(ride.DriverId == _actor.Id)
@@ -43,14 +43,11 @@ namespace RideShare.Implementation.UseCases.Commands.Create
                 throw new InvalidOperationException("Cannot send a request to yourself.");
             }
 
-            if (ride.StartDate < DateTime.Now)
-            {
-                throw new InvalidOperationException("Cannot send a request for a ride in the past.");
-            }
             if (ride.RideRequests.Any(x => x.FromUserId == _actor.Id))
             {
                 throw new InvalidOperationException("You have already sent a request.");
             }
+
             if (ride.RideRequests.Count > ride.Car.NumberOfSeats)
             {
                 throw new InvalidOperationException("You cannot send a request for a ride with no available seats.");

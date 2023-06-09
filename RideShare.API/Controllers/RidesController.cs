@@ -38,7 +38,13 @@ namespace RideShare.API.Controllers
         {
             return Ok(_queryHandler.HandleQuery(query, id));
         }
-
+        // GET api/rides/1/passengers
+        [HttpGet("{id}/passengers")]
+        [Authorize]
+        public IActionResult GetRideUsers(int id, [FromServices] IReadRidePassengersQuery query)
+        {
+            return Ok(_queryHandler.HandleQuery(query, id));
+        }
         // POST api/<RideController>
         [HttpPost]
         [Authorize]
@@ -51,9 +57,17 @@ namespace RideShare.API.Controllers
         // POST api/ride/1/request
         [HttpPost("{id}/request")]
         [Authorize]
-        public IActionResult SendRequest([FromBody] SendRequestDto data, [FromServices] ISendRequestCommand command)
+        public IActionResult SendRequest(int id, [FromServices] ISendRequestCommand command)
         {
-            _commandHandler.HandleCommand(command, data);
+            _commandHandler.HandleCommand(command, id);
+            return StatusCode(201);
+        }
+        // POST api/ride/1/request
+        [HttpPatch("{id}/request")]
+        [Authorize]
+        public IActionResult UpdateRequest(int id)
+        {
+            //_commandHandler.HandleCommand(command, id);
             return StatusCode(201);
         }
         // PUT api/<RideController>/5

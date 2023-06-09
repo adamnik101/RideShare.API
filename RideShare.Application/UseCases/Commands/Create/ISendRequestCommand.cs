@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RideShare.Application.UseCases.Commands.Create
 {
-    public interface ISendRequestCommand : ICommand<SendRequestDto>
+    public interface ISendRequestCommand : ICommand<int>
     {
     }
 }
