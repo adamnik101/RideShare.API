@@ -40,10 +40,16 @@ namespace RideShare.API.JWT
                                .ThenInclude(x => x.RoleUseCases)
                                .FirstOrDefault(x => x.Email == email && x.IsActive == true);
 
-        
-            var verified = BCrypt.Net.BCrypt.Verify(password, user.Password);
 
-            if (user == null || user.Role == null || user.Role.IsActive == false || !verified)
+            
+
+            if (user == null || !user.IsActive || user.Role == null || !user.Role.IsActive)
+            {
+                throw new UnauthorizedAccessException("Invalid credentials.");
+            }
+
+            var verified = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            if (!verified)
             {
                 throw new UnauthorizedAccessException("Invalid credentials.");
             }
