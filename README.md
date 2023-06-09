@@ -5,3 +5,7 @@ Aplikacija sluzi za deljenje voznje. Autorizovan korisnik moze da dodaje voznje 
 Administratori mogu da dohvataju, dodaju i brisu podatke. 
 // izmena nije odradjena.
 Takodje mogu da pretrazuju i dohvataju slucajeve koriscenja. 
+
+Slanje mejla prilikom registracije.
+
+Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog korisnika.
