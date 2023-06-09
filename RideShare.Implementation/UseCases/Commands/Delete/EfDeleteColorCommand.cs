@@ -17,11 +17,9 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
     public class EfDeleteColorCommand : IDeleteColorCommand
     {
         private readonly RideshareContext _context;
-        private readonly DeleteColorValidator _validator;
-        public EfDeleteColorCommand(RideshareContext context, DeleteColorValidator validator)
+        public EfDeleteColorCommand(RideshareContext context)
         {
             _context = context;
-            _validator = validator;
         }
 
         public int Id => 53;
@@ -30,21 +28,18 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
 
         public void Execute(int request)
         {
-            _validator.ValidateAndThrow(request);
-            /*var color = _context.Colors.Include(x => x.Cars).FirstOrDefault(x => x.Id == request);
+            var color = _context.Colors.Include(x => x.Cars).FirstOrDefault(x => x.Id == request);
 
             if (color == null)
             {
                 throw new EntityNotFoundException(request, nameof(Color));
             }
 
-            var colorIsBeingUsed = color.Cars.Any();
-
-            if (colorIsBeingUsed)
+            if (color.Cars.Any(car => car.IsActive))
             {
                 throw new DeleteOperationException($"Cannot delete color. Car with {color.Name} exists");
-            }*/
-            var color = _context.Colors.WhereActive().FirstOrDefault(x => x.Id == request);
+            }
+
 
             color.IsDeleted = true;
             color.DeletedAt = DateTime.UtcNow;

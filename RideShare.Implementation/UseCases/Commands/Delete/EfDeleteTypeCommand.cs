@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using RideShare.Application.Exceptions;
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.DataAccess;
@@ -16,12 +17,10 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
     public class EfDeleteTypeCommand : IDeleteTypeCommand
     {
         private readonly RideshareContext _context;
-        private readonly DeleteTypeValidator _validator;
 
-        public EfDeleteTypeCommand(RideshareContext context, DeleteTypeValidator validator)
+        public EfDeleteTypeCommand(RideshareContext context)
         {
             _context = context;
-            _validator = validator;
         }
 
         public int Id => 200;
@@ -30,9 +29,17 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
 
         public void Execute(int request)
         {
-            _validator.ValidateAndThrow(request);
+            var type = _context.Types.Include(x => x.Cars).FirstOrDefault(x => x.Id == request && x.IsActive);
 
-            var type = _context.Types.WhereActive().FirstOrDefault(x => x.Id == request);
+            if (type == null)
+            {
+                throw new EntityNotFoundException(request, nameof(Domain.Entities.Type));
+            }
+
+            if (type.Cars.Any(car => car.IsActive))
+            {
+                throw new DeleteOperationException("Type cannot be deleted. There is a user car associated with provided type.");
+            }
 
             type.IsDeleted = true;
             type.IsActive = false;

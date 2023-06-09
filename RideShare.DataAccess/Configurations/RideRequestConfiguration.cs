@@ -4,9 +4,9 @@ using RideShare.Domain.Entities;
 
 namespace RideShare.DataAccess.Configurations
 {
-    public class RideRequestConfiguration : IEntityTypeConfiguration<RideRequest>
+    public class RideRequestConfiguration : EntityConfiguration<RideRequest>
     {
-        public void Configure(EntityTypeBuilder<RideRequest> builder)
+        protected override void ConfigureEntity(EntityTypeBuilder<RideRequest> builder)
         {
             builder.HasOne(x => x.FromUser)
                 .WithMany(x => x.SentRideRequests)

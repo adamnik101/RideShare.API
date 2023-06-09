@@ -65,7 +65,7 @@ namespace RideShare.Implementation.UseCases.Queries
                 Car = new ReadDriverCarDto
                 {
                     LicencePlate = x.Car.LicencePlate,
-                    ModelBrand = x.Car.Model.Name + " " + x.Car.Model.Brand.Name,
+                    ModelBrand = x.Car.Model.Brand.Name + " " + x.Car.Model.Name,
                     Color = x.Car.Color.Name,
                     Type = x.Car.Type.Name,
                     NumberOfSeats = x.Car.NumberOfSeats,

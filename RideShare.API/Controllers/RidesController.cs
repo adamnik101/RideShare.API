@@ -48,6 +48,14 @@ namespace RideShare.API.Controllers
             return StatusCode(201);
         }
 
+        // POST api/ride/1/request
+        [HttpPost("{id}/request")]
+        [Authorize]
+        public IActionResult SendRequest([FromBody] SendRequestDto data, [FromServices] ISendRequestCommand command)
+        {
+            _commandHandler.HandleCommand(command, data);
+            return StatusCode(201);
+        }
         // PUT api/<RideController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)

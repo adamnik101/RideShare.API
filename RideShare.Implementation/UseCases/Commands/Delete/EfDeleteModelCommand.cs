@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using RideShare.Application.Exceptions;
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.DataAccess;
@@ -16,11 +17,9 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
     public class EfDeleteModelCommand : IDeleteModelCommand
     {
         private readonly RideshareContext _context;
-        private readonly DeleteModelValidator _validator;
-        public EfDeleteModelCommand(RideshareContext context, DeleteModelValidator validator)
+        public EfDeleteModelCommand(RideshareContext context)
         {
             _context = context;
-            _validator = validator;
         }
 
         public int Id => 8;
@@ -29,9 +28,17 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
 
         public void Execute(int request)
         {
-            _validator.ValidateAndThrow(request);
+            var model = _context.Models.Include(x => x.Cars).FirstOrDefault(x => x.Id == request && x.IsActive);
 
-            var model = _context.Models.WhereActive().FirstOrDefault(x => x.Id == request);
+            if (model == null)
+            {
+                throw new EntityNotFoundException(request, nameof(Model));
+            }
+
+            if(model.Cars.Any(car => car.IsActive))
+            {
+                throw new DeleteOperationException("Cannot delete model when some user has car model with an ID of " + request);
+            }
 
             model.IsDeleted = true;
             model.DeletedAt = DateTime.UtcNow;

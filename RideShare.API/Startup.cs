@@ -186,6 +186,9 @@ namespace RideShare.API
             services.AddTransient<IReadUserCarsQuery, EfReadUserCarsQuery>();  
             services.AddTransient<IReadBrandModelsQuery, EfReadBrandModelsQuery>();
 
+
+            services.AddTransient<ISendRequestCommand, EfSendRequestCommand>();
+
             services.AddTransient<IEmailSender>(x =>
             {
                return new SMTPMailSender(appSettings.EmailOptions.FromEmail,

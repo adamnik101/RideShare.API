@@ -1,4 +1,5 @@
-﻿using RideShare.Application.Exceptions;
+﻿using Microsoft.EntityFrameworkCore;
+using RideShare.Application.Exceptions;
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
@@ -26,11 +27,16 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
 
         public void Execute(int request)
         {
-            var brandToDelete = _context.Brands.WhereActive().FirstOrDefault(x => x.Id == request);
+            var brandToDelete = _context.Brands.Include(x => x.Models).FirstOrDefault(x => x.Id == request && x.IsActive);
 
             if (brandToDelete == null)
             {
                 throw new EntityNotFoundException(request, nameof(Brand));
+            }
+
+            if (brandToDelete.Models.Any(model => model.IsActive))
+            {
+                throw new DeleteOperationException("Cannot delete brand. There is a car model associated with provided brand");
             }
 
             brandToDelete.DeletedAt = DateTime.Now;

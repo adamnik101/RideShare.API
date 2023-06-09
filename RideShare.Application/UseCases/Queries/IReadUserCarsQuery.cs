@@ -1,4 +1,5 @@
-﻿using RideShare.Application.UseCases.DTOs.Read;
+﻿using RideShare.Application.UseCases.DTOs;
+using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries.Searches;
 using System;
 using System.Collections.Generic;

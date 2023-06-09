@@ -12,7 +12,7 @@ namespace RideShare.Implementation.Extensions
         public static IQueryable<T> WhereActive<T> (this IQueryable<T> query)
             where T : Entity
         {
-            return query.Where(x => x.IsActive);
+            return query.Where(x => x.IsActive && !x.IsDeleted);
         }
     }
 }

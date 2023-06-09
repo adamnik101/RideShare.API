@@ -1,4 +1,5 @@
-﻿using RideShare.Application.Exceptions;
+﻿using Microsoft.EntityFrameworkCore;
+using RideShare.Application.Exceptions;
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.DataAccess;
 using RideShare.Domain.Entities;
@@ -26,7 +27,7 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
 
         public void Execute(int request)
         {
-            var cityToDelete = _context.Cities.WhereActive().FirstOrDefault(x => x.Id == request);
+            var cityToDelete = _context.Cities.FirstOrDefault(x => x.Id == request && x.IsActive);
 
             if(cityToDelete == null)
             {

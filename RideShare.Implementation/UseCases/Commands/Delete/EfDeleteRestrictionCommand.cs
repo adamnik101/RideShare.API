@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using RideShare.Application.Exceptions;
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.DataAccess;
@@ -16,11 +17,9 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
     public class EfDeleteRestrictionCommand : IDeleteRestrictionCommand
     {
         private readonly RideshareContext _context;
-        private readonly DeleteRestrictionValidator _validator;
-        public EfDeleteRestrictionCommand(RideshareContext context, DeleteRestrictionValidator validator)
+        public EfDeleteRestrictionCommand(RideshareContext context)
         {
             _context = context;
-            _validator = validator;
         }
 
         public int Id => 71;
@@ -29,9 +28,13 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
 
         public void Execute(int request)
         {
-            _validator.ValidateAndThrow(request);
 
-            var restriction = _context.Restrictions.WhereActive().FirstOrDefault(x => x.Id == request);
+            var restriction = _context.Restrictions.FirstOrDefault(x => x.Id == request && x.IsActive);
+
+            if(restriction == null)
+            {
+                throw new EntityNotFoundException(request, nameof(Restriction));
+            }
 
             restriction.DeletedAt = DateTime.Now;
             restriction.IsDeleted = true;
