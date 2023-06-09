@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using RideShare.Application.Emails;
 using RideShare.Application.UseCases.Commands.Create;
 using RideShare.Application.UseCases.DTOs.Create;
 using RideShare.DataAccess;
@@ -16,11 +17,13 @@ namespace RideShare.Implementation.UseCases.Commands.Create
     {
         private readonly RideshareContext _context;
         private readonly RegisterUserValidator _validator;
+        private readonly IEmailSender _emailSender;
 
-        public EfRegisterUserCommand(RideshareContext context, RegisterUserValidator validator)
+        public EfRegisterUserCommand(RideshareContext context, RegisterUserValidator validator, IEmailSender emailSender)
         {
             _context = context;
             _validator = validator;
+            _emailSender = emailSender;
         }
 
         public int Id => 100;
@@ -52,6 +55,13 @@ namespace RideShare.Implementation.UseCases.Commands.Create
 
             _context.Users.Add(user);
             _context.SaveChanges();
+
+            /*_emailSender.Send(new MessageDto
+            {
+                To = request.Email,
+                Title = "Successful registration!",
+                Body = "Welcome to Rideshare. Hope you enjoy using our services!"
+            });*/
         }
     }
 }

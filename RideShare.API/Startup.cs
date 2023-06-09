@@ -35,6 +35,8 @@ using RideShare.Implementation.UseCases.Commands.Delete;
 using RideShare.Application.UseCases.Commands.Delete;
 using RideShare.Application.Uploads;
 using RideShare.Implementation.Uploads;
+using RideShare.Application.Emails;
+using RideShare.Implementation.Emails;
 
 namespace RideShare.API
 {
@@ -182,7 +184,15 @@ namespace RideShare.API
             services.AddTransient<IBase64FileUploader, Base64FileUploader>();
             //read user cars
             services.AddTransient<IReadUserCarsQuery, EfReadUserCarsQuery>();  
-            services.AddTransient<IReadBrandModelsQuery, EfReadBrandModelsQuery>();  
+            services.AddTransient<IReadBrandModelsQuery, EfReadBrandModelsQuery>();
+
+            services.AddTransient<IEmailSender>(x =>
+            {
+               return new SMTPMailSender(appSettings.EmailOptions.FromEmail,
+                                         appSettings.EmailOptions.Password,
+                                         appSettings.EmailOptions.Port,
+                                         appSettings.EmailOptions.Host);
+            });
         }
 
 

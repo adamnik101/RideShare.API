@@ -46,6 +46,7 @@ namespace RideShare.API.Controllers
 
         // POST api/<UserController>
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult RegisterUser ([FromBody] RegisterUserDto data, [FromServices] IRegisterUserCommand command)
         {
 
