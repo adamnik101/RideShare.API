@@ -8,6 +8,7 @@ Paginacija je dodata za entitete gde je moguc broj rezultata biti veci.
 Autorizacija pomocu JWT tokena.
 Slanje mejla prilikom registracije. 
 Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog korisnika.
+*Dodavanje ocena nakon voznje jos nije implementirano
 
 >Kredencijali za admina:
 `email: luka@gmail.com
@@ -38,7 +39,7 @@ Use cases:
 8. Tipova automobila  `Admin`
 > Dohvatanje i pretraga
 1. Svih brendova automobila i jednog brenda `Admin`
-2. Svih modela automobila i jednog modela `Admin`
+2. Svih modela automobila i jednog modela `Admin` 
 3. Svih modela brendova automobila  `Admin`
 4. Svih slucajeva koriscenja  `Admin`
 5. Svih automobila korisnika i jednog automobila  `Autorizovani korisnik`
