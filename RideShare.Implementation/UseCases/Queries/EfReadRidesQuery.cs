@@ -41,7 +41,16 @@ namespace RideShare.Implementation.UseCases.Queries
                             && x.StartDate.Day == search.RideDate.Day
                             && x.StartDate > DateTime.Now
                             && x.RideRequests.Count < x.Car.NumberOfSeats)
-                .WhereActive();
+                .WhereActive().AsQueryable();
+            if(search.PriceFrom != null)
+            {
+                query = query.Where(x => search.PriceFrom <= x.Price);
+            }
+
+            if(search.PriceTo != null)
+            {
+                query = query.Where(x => search.PriceTo >= x.Price);
+            }
 
             return query.ToPagedResponse(search, x => new ReadRideDto
             {
@@ -74,6 +83,7 @@ namespace RideShare.Implementation.UseCases.Queries
                     FirstRegistration = x.Car.FirstRegistration,
                     ImagePath = x.Car.ImagePath
                 },
+                Price = x.Price,
                 NumberOfAvailableSeats = x.Car.NumberOfSeats - x.RideRequests.Count
             });
 

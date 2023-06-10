@@ -57,8 +57,7 @@ namespace RideShare.Implementation.UseCases.Commands.Create
             {
                 RideId = ride.Id,
                 FromUserId = _actor.Id,
-                ToUserId = ride.DriverId,
-                Status = RideStatus.Sent
+                ToUserId = ride.DriverId
             };
 
             _context.RideRequests.Add(rideRequest);

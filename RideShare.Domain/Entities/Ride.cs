@@ -10,6 +10,7 @@ namespace RideShare.Domain.Entities
         public int EndCityId { get; set; }
         public int DriverId { get; set; }
         public int CarId { get; set; }
+        public decimal Price { get; set; }
         public virtual City StartCity { get; set; }
         public virtual City EndCity { get; set; }
         public virtual User Driver { get; set; }

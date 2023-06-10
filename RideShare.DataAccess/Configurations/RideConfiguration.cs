@@ -8,6 +8,12 @@ namespace RideShare.DataAccess.Configurations
     {
         protected override void ConfigureEntity(EntityTypeBuilder<Ride> builder)
         {
+            builder.Property(x => x.StartCityId).IsRequired();
+            builder.Property(x => x.EndCityId).IsRequired();
+            builder.Property(x => x.DriverId).IsRequired();
+            builder.Property(x => x.CarId).IsRequired();
+            builder.Property(x => x.Price).IsRequired();
+
             builder.HasOne(x => x.StartCity)
                 .WithMany(x => x.StartRides)
                 .HasForeignKey(x => x.StartCityId)

@@ -32,7 +32,10 @@ namespace RideShare.Implementation.Validators
 
             RuleFor(x => x)
                 .Must(x => x.StartCity != x.DestinationCity).WithMessage("Destination city cannot be the same as the start city.");
-
+            RuleFor(x => x.Price)
+                .NotEmpty().WithMessage("Ride price is required.")
+                .Must(x => x > 0).WithMessage("Ride cannot be free.");
+                
             RuleFor(x => x.CarId)
                 .NotEmpty().WithMessage("Car is required.")
                 .Must(x => context.Cars.Any(z => z.Id == x && z.IsActive && z.OwnerId == actor.Id)).WithMessage("Provided car does not exists.");

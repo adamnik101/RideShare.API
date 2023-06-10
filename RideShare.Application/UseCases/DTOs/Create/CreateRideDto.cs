@@ -12,5 +12,6 @@ namespace RideShare.Application.UseCases.DTOs.Create
         public int StartCity { get; set; }
         public int DestinationCity { get; set; }
         public int CarId { get; set; }
+        public decimal Price { get; set; }
     }
 }

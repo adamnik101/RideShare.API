@@ -12,6 +12,7 @@ namespace RideShare.Implementation.Validators
     public class CreateCarValidator : AbstractValidator<CreateCarDto>
     {
         private int currentYear = DateTime.Now.Year;
+
         public CreateCarValidator(RideshareContext context) 
         {
             RuleLevelCascadeMode = CascadeMode.Stop;
@@ -26,7 +27,8 @@ namespace RideShare.Implementation.Validators
 
             var licenceplateRegEx = @"^[A-ZŠŠĐČĆŽ]{2}-([0-9]){3,5}-[A-Z]{2}";
             RuleFor(x => x.LicencePlate).NotEmpty().WithMessage("Licence plate is required.")
-                .Matches(licenceplateRegEx).WithMessage("Licence plate is in wrong format. Example: BG-001-BG");
+                .Matches(licenceplateRegEx).WithMessage("Licence plate is in wrong format. Example: BG-001-BG")
+                .Must(x => !context.Cars.Any(z => z.LicencePlate == x)).WithMessage("You already have a car with {PropertyValue} licence plate.");
 
             RuleFor(x => x.FirstRegistration).NotEmpty().WithMessage("First registration date is required.")
                 .Must(BeValidDateTime).WithMessage("First registration date is not valid.");

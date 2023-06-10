@@ -11,5 +11,7 @@ namespace RideShare.Application.UseCases.Queries.Searches
         public DateTime RideDate { get; set; }
         public int DestinationCity { get; set; }
         public int StartCity { get; set; }
+        public decimal? PriceFrom { get; set; }
+        public decimal? PriceTo { get; set; }
     }
 }
