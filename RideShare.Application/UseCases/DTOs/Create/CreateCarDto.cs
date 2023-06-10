@@ -15,6 +15,6 @@ namespace RideShare.Application.UseCases.DTOs.Create
         public int ColorId { get; set; }
         public int TypeId { get; set; }
         public string Image { get; set; }
-        //public IEnumerable<int> Restrictions { get; set; }
+        public IEnumerable<int?> Restrictions { get; set; }
     }
 }

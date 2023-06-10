@@ -37,6 +37,8 @@ namespace RideShare.Implementation.UseCases.Queries
                                         .Include(x => x.Type)
                                         .Include(x => x.Model)
             .ThenInclude(x => x.Brand)
+            .Include(x => x.CarRestrictions)
+                    .ThenInclude(x => x.Restriction)
                 .Where(x => x.OwnerId == _actor.Id && x.OwnerId == id)
                 .WhereActive();
 
@@ -48,13 +50,17 @@ namespace RideShare.Implementation.UseCases.Queries
             var cars = userCars.Select(x => new ReadCarDto
             {
                 Owner = _actor.Fullname,
-                ModelBrand = x.Model.Name + " " + x.Model.Brand.Name,
+                ModelBrand = x.Model.Brand.Name + " " + x.Model.Name,
                 Color = x.Color.Name,
                 Type = x.Type.Name,
                 LicencePlate = x.LicencePlate,
                 FirstRegistration = x.FirstRegistration,
                 NumberOfSeats = x.NumberOfSeats,
-                ImagePath = x.ImagePath
+                ImagePath = x.ImagePath,
+                Restrictions = x.CarRestrictions.Select(x => new ReadRestrictionDto
+                {
+                    Name = x.Restriction.Name
+                })
             });
 
             return cars;

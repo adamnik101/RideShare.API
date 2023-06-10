@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using RideShare.Application.UseCases.DTOs.Create;
 using RideShare.DataAccess;
+using RideShare.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,9 @@ namespace RideShare.Implementation.Validators
             RuleFor(x => x.NumberOfSeats)
                 .NotEmpty().WithMessage("Number of available seats is required.")
                 .InclusiveBetween(1, 4).WithMessage("Number of available seats must be between 1 and 4");
+            RuleFor(x => x.Restrictions)
+                .Must(x => x == null || x.All(restriction => context.Restrictions.Any(r => r.Id == restriction)))
+                .WithMessage("Provided restrictions do not exists.");
         }
 
         protected bool BeValidDateTime(int firstRegistration)

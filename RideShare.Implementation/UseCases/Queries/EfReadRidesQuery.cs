@@ -62,7 +62,7 @@ namespace RideShare.Implementation.UseCases.Queries
                 DestinationCity = new ReadCityDto
                 {
                     Id = x.EndCity.Id,
-                    Name = x.EndCity.Name 
+                    Name = x.EndCity.Name
                 },
                 StartDate = x.StartDate,
                 Driver = new ReadDriverDto
@@ -72,7 +72,7 @@ namespace RideShare.Implementation.UseCases.Queries
                     LastName = x.Driver.LastName,
                     PhoneNumber = x.Driver.PhoneNumber,
                     Email = x.Driver.Email,
-                }, 
+                },
                 Car = new ReadDriverCarDto
                 {
                     LicencePlate = x.Car.LicencePlate,
@@ -81,11 +81,15 @@ namespace RideShare.Implementation.UseCases.Queries
                     Type = x.Car.Type.Name,
                     NumberOfSeats = x.Car.NumberOfSeats,
                     FirstRegistration = x.Car.FirstRegistration,
-                    ImagePath = x.Car.ImagePath
+                    ImagePath = x.Car.ImagePath,
+                    Restrictions = x.Car.CarRestrictions.Select(x => new ReadRestrictionDto
+                    {
+                        Name = x.Restriction.Name
+                    }),
                 },
                 Price = x.Price,
                 NumberOfAvailableSeats = x.Car.NumberOfSeats - x.RideRequests.Count
-            });
+            }); 
 
                                     
         }

@@ -61,12 +61,16 @@ namespace RideShare.Implementation.UseCases.Queries
             return query.ToPagedResponse(search, x => new ReadCarDto
             {
                 Owner = _actor.Fullname,
-                ModelBrand = x.Model.Name + " " + x.Model.Brand.Name,
+                ModelBrand = x.Model.Brand.Name + " " + x.Model.Name,
                 Color = x.Color.Name,
                 Type = x.Type.Name,
                 LicencePlate = x.LicencePlate,
                 FirstRegistration = x.FirstRegistration,
-                NumberOfSeats = x.NumberOfSeats
+                NumberOfSeats = x.NumberOfSeats,
+                Restrictions = x.CarRestrictions.Select(x => new ReadRestrictionDto
+                {
+                    Name = x.Restriction.Name
+                })
             });
         }
     }

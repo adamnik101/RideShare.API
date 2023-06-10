@@ -16,5 +16,6 @@ namespace RideShare.Application.UseCases.DTOs.Read
         public string LicencePlate { get; set; }
         public string Owner { get; set; }
         public int FirstRegistration { get; set; }
+        public IEnumerable<ReadRestrictionDto> Restrictions { get; set; }
     }
 }

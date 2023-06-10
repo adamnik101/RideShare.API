@@ -15,5 +15,6 @@ namespace RideShare.Application.UseCases.DTOs.Read
         public string Type { get; set; }
         public int FirstRegistration { get; set; }
         public string ImagePath { get; set; }
+        public IEnumerable<ReadRestrictionDto> Restrictions { get; set; }
     }
 }

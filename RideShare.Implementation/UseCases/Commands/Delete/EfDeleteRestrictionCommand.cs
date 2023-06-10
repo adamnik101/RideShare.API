@@ -29,11 +29,15 @@ namespace RideShare.Implementation.UseCases.Commands.Delete
         public void Execute(int request)
         {
 
-            var restriction = _context.Restrictions.FirstOrDefault(x => x.Id == request && x.IsActive);
+            var restriction = _context.Restrictions.Include(x => x.CarRestrictions).FirstOrDefault(x => x.Id == request && x.IsActive);
 
             if(restriction == null)
             {
                 throw new EntityNotFoundException(request, nameof(Restriction));
+            }
+            if(restriction.CarRestrictions.Any())
+            {
+                throw new InvalidOperationException("Cannot delete restriction. There is a user car associated with it.");
             }
 
             restriction.DeletedAt = DateTime.Now;

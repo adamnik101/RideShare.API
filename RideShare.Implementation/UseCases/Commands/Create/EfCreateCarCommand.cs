@@ -49,10 +49,18 @@ namespace RideShare.Implementation.UseCases.Commands.Create
                 TypeId = request.TypeId,
                 ImagePath = imagePath
             };
-
+            if(request.Restrictions != null)
+            {
+                var restrictions = request.Restrictions.Select(restriction => new CarRestriction
+                {
+                    Car = car,
+                    RestrictionId = restriction.Value
+                }).ToList();
+                _context.CarRestrictions.AddRange(restrictions);
+            }
             _context.Cars.Add(car);
-
-            _context.SaveChanges();
+            
+            _context.SaveChanges(true);
         }
     }
 }
