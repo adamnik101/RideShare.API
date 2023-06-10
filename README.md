@@ -11,7 +11,7 @@ Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog koris
 *Dodavanje ocena nakon voznje jos nije implementirano
 
 >Kredencijali za admina:
-`email: luka@gmail.com
+`email: luke@gmail.com
  password: sifra1`
  
 >Dizajn baze podataka
