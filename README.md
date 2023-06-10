@@ -10,8 +10,8 @@ Slanje mejla prilikom registracije.
 Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog korisnika.
 
 >Kredencijali za admina:
-`luka@gmail.com
-sifra1`
+`email: luka@gmail.com
+ password: sifra1`
 
 Use cases:
 > Autorizacija
