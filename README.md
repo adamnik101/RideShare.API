@@ -11,3 +11,23 @@ Autorizacija pomocu JWT tokena.
 Slanje mejla prilikom registracije.
 
 Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog korisnika.
+
+Use cases:
+> Autorizacija
+1. Logovanje [HttpPost] /auth
+2. Registracija [HttpPost] /users
+
+> Brendovi automobila
+1. Dohvatanje brendova [HttpGet] /brands
+2. Dohvatanje jednog brenda [HttpGet] /brands/{id}
+3. Dohvatanje modele brendova [HttpGet] /brands/{id}/models
+4. Dodavanje brenda [HttpPost] /brands
+5. Brisanje brenda [HttpDelete] /brands/{id}
+
+> Automobili
+1. Dohvatanje automobila [HttpGet] /cars
+2. Dohvatanje jednog automobila [HttpGet] /cars/{id}
+3. Dodavanje automobila [HttpPost] /cars
+4. Brisanje automobila [HttpDelete] /cars/{id}
+
+.....
