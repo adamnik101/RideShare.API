@@ -15,29 +15,29 @@ Use cases:
 2. Registracija [HttpPost] /users
 
 > Kreiranje
-1. Brendova automobila
-2. Modela automobila
-3. Gradova
-4. Boja
-5. Restrikcija automobila
-6. Voznji
-7. Tipova automobila
+1. Brendova automobila  `Admin`
+2. Modela automobila  `Admin`  
+3. Gradova  `Admin`
+4. Boja `Admin`
+5. Restrikcija automobila `Admin`
+6. Tipova automobila  `Admin`
+7. Voznji
 8. Putnika za voznju
 > Brisanje
-1. Brendova automobila
-2. Automobila
-3. Gradova
-4. Boja
-5. Modela automobila
-6. Restrikcija automobila
+1. Brendova automobila  `Admin`
+2. Automobila 
+3. Gradova  `Admin`
+4. Boja `Admin`
+5. Modela automobila  `Admin`
+6. Restrikcija automobila `Admin`
 7. Voznji
-8. Tipova automobila
+8. Tipova automobila  `Admin`
 > Dohvatanje i pretraga
 1. Svih brendova automobila i jednog brenda
 2. Svih modela automobila i jednog modela
 3. Svih modela brendova automobila 
-4. Svih slucajeva koriscenja 
-5. Svih automobila korisnika i jednog automobila
+4. Svih slucajeva koriscenja  `Admin`
+5. Svih automobila korisnika i jednog automobila  `Autorizovani korisnik`
 6. Svih restrikcija i jedne restrikcije
 7. Svih voznji i jedne voznje
 8. Svih tipova automobila i jednog tipa automobila
