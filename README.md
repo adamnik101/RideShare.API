@@ -13,7 +13,9 @@ Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog koris
 >Kredencijali za admina:
 `email: luka@gmail.com
  password: sifra1`
+ 
 >Dizajn baze podataka
+
 ![image](https://github.com/adamnik101/RideShare.API/assets/58403484/32aaae29-e24f-4dae-9a4f-953622dae101)
 
 Use cases:
