@@ -9,9 +9,13 @@ Autorizacija pomocu JWT tokena.
 Slanje mejla prilikom registracije. 
 Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog korisnika.
 
+>Kredencijali za admina:
+`luka@gmail.com
+sifra1`
+
 Use cases:
 > Autorizacija
-1. Logovanje [HttpPost] /auth
+1. Logovanje [HttpPost] /auth       
 2. Registracija [HttpPost] /users
 
 > Kreiranje
