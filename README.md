@@ -17,16 +17,16 @@ Use cases:
 2. Registracija [HttpPost] /users
 
 > Brendovi automobila
-1. Dohvatanje brendova [HttpGet] /brands
-2. Dohvatanje jednog brenda [HttpGet] /brands/{id}
-3. Dohvatanje modele brendova [HttpGet] /brands/{id}/models
+1. Dohvatanje brendova [HttpGet] /brands  
+2. Dohvatanje jednog brenda [HttpGet] /brands/{id}  **Admin**
+3. Dohvatanje modele brendova [HttpGet] /brands/{id}/models 
 4. Dodavanje brenda [HttpPost] /brands
-5. Brisanje brenda [HttpDelete] /brands/{id}
+5. Brisanje brenda [HttpDelete] /brands/{id}  **Admin**
 
 > Automobili
 1. Dohvatanje automobila [HttpGet] /cars
 2. Dohvatanje jednog automobila [HttpGet] /cars/{id}
-3. Dodavanje automobila [HttpPost] /cars
-4. Brisanje automobila [HttpDelete] /cars/{id}
+3. Dodavanje automobila [HttpPost] /cars  **Autorizovani korisnici**
+4. Brisanje automobila [HttpDelete] /cars/{id}  **Autorizovani korisnici**
 
 .....
