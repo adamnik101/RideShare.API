@@ -2,9 +2,9 @@
 # WEB programiranje ASP - Projekat
 
 Aplikacija sluzi za deljenje voznje. Autorizovan korisnik moze da dodaje voznje i svoje automobile. Dok drugi autorizovani korisnici mogu da se prijave da budu putnici. Neautorizovani i autorizovani korisnici mogu da pretrazuju voznje.
-Administratori mogu da dohvataju, dodaju i brisu podatke(brendovi, modeli, restrikcije za automobile, gradove, automobile, boje, tipove automobila). [izmena treba da se doda]
+Administratori mogu da dohvataju, dodaju i brisu podatke(korisnici, brendovi, modeli, restrikcije za automobile, gradove, automobile, boje, tipove automobila). [izmena treba da se doda]
 Takodje mogu da pretrazuju i dohvataju slucajeve koriscenja. 
-Paginacija je dodata za entitete gde je moguc broj rezultata biti veci.
+Paginacija je dodata za entitete ciji broj rezultata moze biti veci.
 Autorizacija pomocu JWT tokena.
 Slanje mejla prilikom registracije. 
 Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog korisnika.
@@ -52,3 +52,5 @@ Use cases:
 8. Svih tipova automobila i jednog tipa automobila  `Admin`
 9. Svih gradova i jednog grada  `Admin`
 10. Svih boja i jedne boje  `Admin`
+11. Svih korisnika sistema `Admin`
+12. Informacija o korisniku i njegovim automobilima i voznjama `Admin` `Autorizovani korisnik`
