@@ -49,8 +49,9 @@ namespace RideShare.Implementation.UseCases.Queries
             
             var cars = userCars.Select(x => new ReadCarDto
             {
+                Id = x.Id,
                 Owner = _actor.Fullname,
-                ModelBrand = x.Model.Brand.Name + " " + x.Model.Name,
+                BrandModel = x.Model.Brand.Name + " " + x.Model.Name,
                 Color = x.Color.Name,
                 Type = x.Type.Name,
                 LicencePlate = x.LicencePlate,

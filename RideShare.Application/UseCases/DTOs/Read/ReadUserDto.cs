@@ -15,5 +15,7 @@ namespace RideShare.Application.UseCases.DTOs.Read
         public string PhoneNumber { get; set; }
         public string Gender { get; set; }
         public string Role { get; set; }
+        public IEnumerable<ReadCarDto> Cars { get; set; }
+        public IEnumerable<ReadRideDto> Rides { get; set; }
     }
 }

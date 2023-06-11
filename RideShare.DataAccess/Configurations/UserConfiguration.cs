@@ -22,6 +22,11 @@ namespace RideShare.DataAccess.Configurations
                 .HasForeignKey(x => x.GenderId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasMany(x => x.Rides)
+                .WithOne(x => x.Driver)
+                .HasForeignKey(x => x.DriverId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

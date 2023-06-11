@@ -19,6 +19,7 @@ namespace RideShare.Domain.Entities
         public virtual ICollection<RideRequest> SentRideRequests { get; set; } = new HashSet<RideRequest>();
         public virtual ICollection<RideRequest> ReceivedRideRequests { get; set; } = new HashSet<RideRequest>();
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
+        public virtual ICollection<Ride> Rides { get; set; } = new HashSet<Ride>();
 
     }
 }

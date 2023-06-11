@@ -47,13 +47,19 @@ namespace RideShare.Implementation.UseCases.Queries
 
             ReadCarDto car = new ReadCarDto
             {
+                Id = userCar.Id,
                 Owner = _actor.Fullname,
-                ModelBrand = userCar.Model.Name + " " + userCar.Model.Brand.Name,
+                BrandModel = userCar.Model.Name + " " + userCar.Model.Brand.Name,
                 Color = userCar.Color.Name,
                 Type = userCar.Type.Name,
                 LicencePlate = userCar.LicencePlate,
                 FirstRegistration = userCar.FirstRegistration,
-                NumberOfSeats = userCar.NumberOfSeats
+                NumberOfSeats = userCar.NumberOfSeats,
+                ImagePath = userCar.ImagePath,
+                Restrictions = userCar.CarRestrictions.Select(x => new ReadRestrictionDto
+                {
+                    Name = x.Restriction.Name
+                })
             };
 
             return car;

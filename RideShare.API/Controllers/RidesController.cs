@@ -14,6 +14,7 @@ namespace RideShare.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RidesController : ControllerBase
     {
         private readonly IQueryHandler _queryHandler;
@@ -27,6 +28,7 @@ namespace RideShare.API.Controllers
 
         // GET: api/<RideController>
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get([FromQuery] SearchRideDto data, [FromServices] IReadRidesQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, data));
@@ -34,20 +36,19 @@ namespace RideShare.API.Controllers
 
         // GET api/<RideController>/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult Get(int id, [FromServices] IFindRideQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, id));
         }
         // GET api/rides/1/passengers
         [HttpGet("{id}/passengers")]
-        [Authorize]
         public IActionResult GetRideUsers(int id, [FromServices] IReadRidePassengersQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, id));
         }
         // POST api/<RideController>
         [HttpPost]
-        [Authorize]
         public IActionResult Post([FromBody] CreateRideDto data, [FromServices] ICreateRideCommand command)
         {
             _commandHandler.HandleCommand(command, data);
@@ -56,7 +57,6 @@ namespace RideShare.API.Controllers
 
         // POST api/ride/1/request
         [HttpPost("{id}/request")]
-        [Authorize]
         public IActionResult SendRequest(int id, [FromServices] ISendRequestCommand command)
         {
             _commandHandler.HandleCommand(command, id);
@@ -64,7 +64,6 @@ namespace RideShare.API.Controllers
         }
         // POST api/ride/1/request
         [HttpPatch("{id}/request")]
-        [Authorize]
         public IActionResult UpdateRequest(int id)
         {
             //_commandHandler.HandleCommand(command, id);

@@ -8,7 +8,8 @@ namespace RideShare.Application.UseCases.DTOs.Read
 {
     public class ReadCarDto
     {
-        public string ModelBrand { get; set; }
+        public int Id { get; set; }
+        public string BrandModel { get; set; }
         public string Color { get; set; }
         public string Type { get; set; }
         public string ImagePath { get; set; }
@@ -16,6 +17,6 @@ namespace RideShare.Application.UseCases.DTOs.Read
         public string LicencePlate { get; set; }
         public string Owner { get; set; }
         public int FirstRegistration { get; set; }
-        public IEnumerable<ReadRestrictionDto> Restrictions { get; set; }
+        public IEnumerable<ReadRestrictionDto?> Restrictions { get; set; }
     }
 }

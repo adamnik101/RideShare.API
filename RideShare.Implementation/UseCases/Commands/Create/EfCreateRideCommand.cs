@@ -39,7 +39,8 @@ namespace RideShare.Implementation.UseCases.Commands.Create
                 StartCityId = request.StartCity,
                 EndCityId = request.DestinationCity,
                 CarId = request.CarId,
-                DriverId = _actor.Id
+                DriverId = _actor.Id,
+                Price = request.Price,
             };
 
             _context.Rides.Add(ride);
