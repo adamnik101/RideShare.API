@@ -1,14 +1,7 @@
 
 # WEB programiranje ASP - Projekat
 
-Aplikacija sluzi za deljenje voznje. Autorizovan korisnik moze da dodaje voznje i svoje automobile. Dok drugi autorizovani korisnici mogu da se prijave da budu putnici. Neautorizovani i autorizovani korisnici mogu da pretrazuju voznje.
-Administratori mogu da dohvataju, dodaju i brisu podatke(korisnici, brendovi, modeli, restrikcije za automobile, gradove, automobile, boje, tipove automobila). [izmena treba da se doda]
-Takodje mogu da pretrazuju i dohvataju slucajeve koriscenja. 
-Paginacija je dodata za entitete ciji broj rezultata moze biti veci.
-Autorizacija pomocu JWT tokena.
-Slanje mejla prilikom registracije. 
-Unos fajla tj. slike pomocu base64 prilikom unosa automobila autorizovanog korisnika.
-*Dodavanje ocena nakon voznje jos nije implementirano
+The application is used for ride sharing. Authorized users can add rides and their own cars, while other authorized users can sign up to be passengers. Unauthorized and authorized users can search for rides. Administrators can retrieve, add, and delete data (users, brands, models, car restrictions, cities, cars, colors, car types). [The update needs to be added] They can also search for and retrieve usage cases. Pagination is added for entities with a larger number of results. Authorization is done using JWT tokens. An email is sent during registration. File or image input using base64 is used when adding a car for an authorized user. *Adding ratings after a ride has not been implemented yet.
 
 >Kredencijali za admina:
 `email: luke@gmail.com
