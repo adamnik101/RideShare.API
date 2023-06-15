@@ -28,6 +28,7 @@ namespace RideShare.DataAccess.Configurations
                 .WithMany(x => x.Rides)
                 .HasForeignKey(x => x.CarId)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

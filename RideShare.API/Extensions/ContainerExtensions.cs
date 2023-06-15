@@ -26,6 +26,7 @@ namespace RideShare.API.Extensions
             services.AddTransient<CreateRideValidator>();
             services.AddTransient<SearchUseCaseValidator>();
             services.AddTransient<CreateCarValidator>();
+            services.AddTransient<UpdateNameValidator>();
         }
         public static void addJWT (this IServiceCollection services, AppSettings settings)
         {

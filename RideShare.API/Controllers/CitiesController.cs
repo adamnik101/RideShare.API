@@ -4,6 +4,8 @@ using RideShare.Application.UseCaseHandling.Command;
 using RideShare.Application.UseCaseHandling.Query;
 using RideShare.Application.UseCases.Commands.Create;
 using RideShare.Application.UseCases.Commands.Delete;
+using RideShare.Application.UseCases.Commands.Update;
+using RideShare.Application.UseCases.DTOs;
 using RideShare.Application.UseCases.DTOs.Create;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
@@ -17,39 +19,52 @@ namespace RideShare.API.Controllers
     [Authorize]
     public class CitiesController : ControllerBase
     {
+        private readonly IQueryHandler _queryHandler;
+        private readonly ICommandHandler _commandHandler;
+
+        public CitiesController(IQueryHandler queryHandler, ICommandHandler commandHandler)
+        {
+            _queryHandler = queryHandler;
+            _commandHandler = commandHandler;
+        }
+
         // GET: api/<CityController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchName data, [FromServices] IQueryHandler handler, [FromServices] IReadCitiesQuery query)
+        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadCitiesQuery query)
         {
-            return Ok(handler.HandleQuery(query, data));
+            return Ok(_queryHandler.HandleQuery(query, data));
         }
 
         // GET api/<CityController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id, [FromServices] IQueryHandler handler, [FromServices] IFindCityQuery query)
+        public IActionResult Get(int id, [FromServices] IFindCityQuery query)
         {
-            return Ok(handler.HandleQuery(query, id));
+            return Ok(_queryHandler.HandleQuery(query, id));
         }
 
         // POST api/<CityController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateNameOnlyDto data, [FromServices] ICommandHandler handler, [FromServices] ICreateCityCommand command)
+        public IActionResult Post([FromBody] CreateNameOnlyDto data, [FromServices] ICreateCityCommand command)
         {
-            handler.HandleCommand(command, data);
+            _commandHandler.HandleCommand(command, data);
             return StatusCode(201);
         }
 
         // PUT api/<CityController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] UpdateNameDto data, [FromServices] IUpdateCityCommand command)
         {
+            data.Id = id;
+            _commandHandler.HandleCommand(command, data);
+
+            return NoContent();
         }
 
         // DELETE api/<CityController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] ICommandHandler handler, [FromServices] IDeleteCityCommand command)
+        public IActionResult Delete(int id, [FromServices] IDeleteCityCommand command)
         {
-            handler.HandleCommand(command, id);
+            _commandHandler.HandleCommand(command, id);
             return NoContent();
         }
     }

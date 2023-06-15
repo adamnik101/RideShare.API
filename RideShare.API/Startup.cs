@@ -37,6 +37,8 @@ using RideShare.Application.Uploads;
 using RideShare.Implementation.Uploads;
 using RideShare.Application.Emails;
 using RideShare.Implementation.Emails;
+using RideShare.Application.UseCases.Commands.Update;
+using RideShare.Implementation.UseCases.Commands.Update;
 
 namespace RideShare.API
 {
@@ -133,23 +135,27 @@ namespace RideShare.API
             services.AddTransient<ICreateBrandCommand, EfCreateBrandCommand>(); // create
             services.AddTransient<IReadBrandsQuery, EfReadBrandsQuery>(); // get all
             services.AddTransient<IFindBrandQuery, EfFindBrandQuery>(); // find one
+            services.AddTransient<IUpdateBrandCommand, EfUpdateBrandCommand>(); // update
             services.AddTransient<IDeleteBrandCommand, EfDeleteBrandCommand>(); // delete one
             //models
             services.AddTransient<ICreateModelCommand, EfCreateModelCommand>(); // create
             services.AddTransient<IReadModelsQuery, EfReadModelsQuery>(); // get all
             services.AddTransient<IFindModelQuery, EfFindModelQuery>(); // find one
+            services.AddTransient<IUpdateModelCommand, EfUpdateModelCommand>(); // update
             services.AddTransient<IDeleteModelCommand, EfDeleteModelCommand>(); // delete one
 
             //cities
             services.AddTransient<ICreateCityCommand, EfCreateCityCommand>(); // create
             services.AddTransient<IReadCitiesQuery, EfReadCitiesQuery>(); // get all
             services.AddTransient<IFindCityQuery, EfFindCityQuery>(); // find one
+            services.AddTransient<IUpdateCityCommand, EfUpdateCityCommand>(); // update
             services.AddTransient<IDeleteCityCommand, EfDeleteCityCommand>(); // delete one
 
             //restrictions
             services.AddTransient<ICreateRestrictionCommand, EfCreateRestrictionCommand>(); // create
             services.AddTransient<IReadRestrictionQuery, EfReadRestrictionsQuery>(); // get all
             services.AddTransient<IFindRestrictionQuery, EfFindRestrictionQuery>(); // find one
+            services.AddTransient<IUpdateRestrictionCommand, EfUpdateRestrictionCommand>(); // update
             services.AddTransient<IDeleteRestrictionCommand, EfDeleteRestrictionCommand>(); // delete one
 
             //cars
@@ -168,12 +174,14 @@ namespace RideShare.API
             services.AddTransient<ICreateTypeCommand, EfCreateTypeCommand>(); // create
             services.AddTransient<IReadTypesQuery, EfReadTypesQuery>(); // get all
             services.AddTransient<IFindTypeQuery, EfFindTypeQuery>(); // find one
+            services.AddTransient<IUpdateTypeCommand, EfUpdateTypeCommand>(); // update
             services.AddTransient<IDeleteTypeCommand, EfDeleteTypeCommand>(); // delete one
 
             //colors
             services.AddTransient<ICreateColorCommand, EfCreateColorCommand>(); // create
             services.AddTransient<IReadColorsQuery, EfReadColorsQuery>(); // get all
             services.AddTransient<IFindColorQuery, EfFindColorQuery>(); // find one
+            services.AddTransient<IUpdateColorCommand, EfUpdateColorCommand>(); // update
             services.AddTransient<IDeleteColorCommand, EfDeleteColorCommand>(); // delete one
 
             services.AddTransient<IReadUseCaseLogsQuery, EfReadUseCaseLogsQuery>(); // read logs

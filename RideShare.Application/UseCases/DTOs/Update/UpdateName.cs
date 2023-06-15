@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace RideShare.Application.UseCases.DTOs.Update
 {
-    public class UpdateName
+    public abstract class UpdateEntity
     {
-        public string Name { get; set; }
+        
     }
 }

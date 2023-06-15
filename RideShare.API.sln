@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RideShare.API", "RideShare.API\RideShare.API.csproj", "{D4B9BBD1-E863-4D75-BB8E-2C8EE7AD545B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.API", "RideShare.API\RideShare.API.csproj", "{D4B9BBD1-E863-4D75-BB8E-2C8EE7AD545B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RideShare.Application", "RideShare.Application\RideShare.Application.csproj", "{E9942B85-8713-4B85-8897-51E87E9E8CB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.Application", "RideShare.Application\RideShare.Application.csproj", "{E9942B85-8713-4B85-8897-51E87E9E8CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RideShare.Implementation", "RideShare.Implementation\RideShare.Implementation.csproj", "{897E6A65-81D3-4B5F-A6DF-F7E27B914C2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.Implementation", "RideShare.Implementation\RideShare.Implementation.csproj", "{897E6A65-81D3-4B5F-A6DF-F7E27B914C2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RideShare.Domain", "RideShare.Domain\RideShare.Domain.csproj", "{75F1FC4D-A436-4FEC-AA0C-B4E50DC67A62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.Domain", "RideShare.Domain\RideShare.Domain.csproj", "{75F1FC4D-A436-4FEC-AA0C-B4E50DC67A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RideShare.DataAccess", "RideShare.DataAccess\RideShare.DataAccess.csproj", "{C00D7730-1880-4DFB-B678-470130346A04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.DataAccess", "RideShare.DataAccess\RideShare.DataAccess.csproj", "{C00D7730-1880-4DFB-B678-470130346A04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

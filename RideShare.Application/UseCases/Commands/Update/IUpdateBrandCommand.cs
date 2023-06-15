@@ -9,5 +9,6 @@ namespace RideShare.Application.UseCases.Commands.Update
 {
     public interface IUpdateBrandCommand : ICommand<UpdateNameDto>
     {
+    
     }
 }

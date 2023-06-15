@@ -4,7 +4,9 @@ using RideShare.Application.UseCaseHandling.Command;
 using RideShare.Application.UseCaseHandling.Query;
 using RideShare.Application.UseCases.Commands.Create;
 using RideShare.Application.UseCases.Commands.Delete;
+using RideShare.Application.UseCases.Commands.Update;
 using RideShare.Application.UseCases.DTOs.Create;
+using RideShare.Application.UseCases.DTOs.Update;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
 
@@ -17,39 +19,52 @@ namespace RideShare.API.Controllers
     [Authorize]
     public class ModelsController : ControllerBase
     {
+        private readonly IQueryHandler _queryHandler;
+        private readonly ICommandHandler _commandHandler;
+
+        public ModelsController(IQueryHandler queryHandler, ICommandHandler commandHandler)
+        {
+            _queryHandler = queryHandler;
+            _commandHandler = commandHandler;
+        }
+
         // GET: api/<ModelController>
         [HttpGet]
-        public IActionResult Get([FromQuery] SearchName data, [FromServices] IQueryHandler handler, [FromServices] IReadModelsQuery query)
+        public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadModelsQuery query)
         {
-            return Ok(handler.HandleQuery(query, data));
+            return Ok(_queryHandler.HandleQuery(query, data));
         }
 
         // GET api/<ModelController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id, [FromServices] IQueryHandler handler, [FromServices] IFindModelQuery query)
+        public IActionResult Get(int id, [FromServices] IFindModelQuery query)
         {
-            return Ok(handler.HandleQuery(query, id));
+            return Ok(_queryHandler.HandleQuery(query, id));
         }
 
         // POST api/<ModelController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateModelDto data, [FromServices] ICommandHandler handler, [FromServices] ICreateModelCommand command)
+        public IActionResult Post([FromBody] CreateModelDto data, [FromServices] ICreateModelCommand command)
         {
-            handler.HandleCommand(command, data);
+            _commandHandler.HandleCommand(command, data);
             return StatusCode(201);
         }
 
         // PUT api/<ModelController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] UpdateModel data, [FromServices] IUpdateModelCommand command)
         {
+            data.Id = id;
+            _commandHandler.HandleCommand(command, data);
+
+            return NoContent();
         }
 
         // DELETE api/<ModelController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, [FromServices] ICommandHandler handler, [FromServices] IDeleteModelCommand command)
+        public IActionResult Delete(int id, [FromServices] IDeleteModelCommand command)
         {
-            handler.HandleCommand(command, id);
+            _commandHandler.HandleCommand(command, id);
             return NoContent();
         }
     }

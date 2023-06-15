@@ -58,9 +58,10 @@ namespace RideShare.API.Controllers
 
         // PUT api/<BrandController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateNameDto data)
+        public IActionResult Put(int id, [FromBody] UpdateNameDto data, [FromServices] IUpdateBrandCommand command)
         {
-           /* _commandHandler.HandleCommand(command, data);*/
+            data.Id = id;
+            _commandHandler.HandleCommand(command, data);
             return NoContent();
         }
 
