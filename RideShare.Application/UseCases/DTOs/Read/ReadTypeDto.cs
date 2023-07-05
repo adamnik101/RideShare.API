@@ -8,6 +8,7 @@ namespace RideShare.Application.UseCases.DTOs.Read
 {
     public class ReadTypeDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

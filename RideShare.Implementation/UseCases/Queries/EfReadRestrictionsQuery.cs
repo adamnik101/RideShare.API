@@ -34,6 +34,7 @@ namespace RideShare.Implementation.UseCases.Queries
             }
             return query.ToPagedResponse(search, x => new ReadRestrictionDto
             {
+                Id = x.Id,
                 Name = x.Name
             });
         }

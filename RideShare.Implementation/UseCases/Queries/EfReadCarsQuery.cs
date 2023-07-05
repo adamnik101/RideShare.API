@@ -71,6 +71,7 @@ namespace RideShare.Implementation.UseCases.Queries
                 ImagePath = x.ImagePath,
                 Restrictions = x.CarRestrictions.Select(x => new ReadRestrictionDto
                 {
+                    Id = x.Restriction.Id,
                     Name = x.Restriction.Name
                 })
             });

@@ -34,7 +34,7 @@ namespace RideShare.Implementation.UseCases.Queries
                 query = query.Where(x => x.Name.ToLower().Contains(search.Name.ToLower()));
             }
 
-           return query.ToPagedResponse(search, x => new ReadTypeDto { Name = x.Name });
+           return query.ToPagedResponse(search, x => new ReadTypeDto {Id = x.Id ,Name = x.Name });
         }
     }
 }

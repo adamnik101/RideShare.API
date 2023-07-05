@@ -50,6 +50,7 @@ namespace RideShare.API
         }
 
         public IConfiguration Configuration { get; }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -168,6 +169,7 @@ namespace RideShare.API
             services.AddTransient<ICreateRideCommand, EfCreateRideCommand>(); // create
             services.AddTransient<IReadRidesQuery,EfReadRidesQuery>(); // get all
             services.AddTransient<IFindRideQuery,EfFindRideQuery>(); // find one
+            services.AddTransient<IUpdateRideCommand,EfUpdateRideCommand>(); // update
             services.AddTransient<IDeleteRideCommand, EfDeleteRideCommand>(); // delete one
 
             //types
@@ -194,6 +196,7 @@ namespace RideShare.API
             services.AddTransient<IReadUserCarsQuery, EfReadUserCarsQuery>();  
             services.AddTransient<IReadBrandModelsQuery, EfReadBrandModelsQuery>();
 
+            services.AddTransient<IReadGendersQuery, EfReadGendersQuery>();
 
             services.AddTransient<ISendRequestCommand, EfSendRequestCommand>();
             services.AddTransient<IReadRidePassengersQuery, EfReadRidePassengersQuery>();

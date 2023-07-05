@@ -9,5 +9,6 @@ namespace RideShare.Application.UseCases.Commands.Create
 {
     public interface ICreateBrandCommand : ICommand<CreateNameOnlyDto>
     {
+
     }
 }

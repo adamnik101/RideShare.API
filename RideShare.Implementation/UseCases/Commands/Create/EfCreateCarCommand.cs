@@ -36,7 +36,7 @@ namespace RideShare.Implementation.UseCases.Commands.Create
         {
             _validator.ValidateAndThrow(request);
 
-            var imagePath = _uploader.Upload(request.Image);
+            //var imagePath = _uploader.Upload(request.Image);
 
             Car car = new Car
             {
@@ -47,7 +47,7 @@ namespace RideShare.Implementation.UseCases.Commands.Create
                 NumberOfSeats = request.NumberOfSeats,
                 OwnerId = _actor.Id,
                 TypeId = request.TypeId,
-                ImagePath = imagePath
+                ImagePath = null
             };
             if(request.Restrictions != null)
             {

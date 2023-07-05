@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RideShare.Application;
 using RideShare.Application.UseCases.DTOs;
 using RideShare.Application.UseCases.DTOs.Read;
 using RideShare.Application.UseCases.Queries;
@@ -17,10 +18,12 @@ namespace RideShare.Implementation.UseCases.Queries
     public class EfReadRidesQuery : IReadRidesQuery
     {
         private readonly RideshareContext _context;
+        private readonly IApplicationActor _actor;
 
-        public EfReadRidesQuery(RideshareContext context)
+        public EfReadRidesQuery(RideshareContext context, IApplicationActor actor)
         {
             _context = context;
+            _actor = actor;
         }
 
         public int Id => 301;
@@ -39,8 +42,9 @@ namespace RideShare.Implementation.UseCases.Queries
                             && x.StartDate.Year == search.RideDate.Year
                             && x.StartDate.Month == search.RideDate.Month
                             && x.StartDate.Day == search.RideDate.Day
-                            && x.StartDate > DateTime.Now
-                            && x.RideRequests.Count < x.Car.NumberOfSeats)
+                        
+                            && x.RideRequests.Count < x.Car.NumberOfSeats
+                            && x.Driver.Id != _actor.Id)
                 .WhereActive().AsQueryable();
             if(search.PriceFrom != null)
             {

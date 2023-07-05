@@ -30,6 +30,7 @@ namespace RideShare.API.Controllers
 
         // GET: api/<CityController>
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get([FromQuery] SearchName data, [FromServices] IReadCitiesQuery query)
         {
             return Ok(_queryHandler.HandleQuery(query, data));

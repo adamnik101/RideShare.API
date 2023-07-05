@@ -36,6 +36,7 @@ namespace RideShare.Implementation.UseCases.Queries
 
             return query.ToPagedResponse(search, x => new ReadBrandDto
             {   
+                Id = x.Id,
                 Name = x.Name,
                 Models = x.Models.Select(z => new ReadModelDto
                 {

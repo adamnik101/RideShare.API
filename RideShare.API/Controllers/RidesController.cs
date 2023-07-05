@@ -4,7 +4,9 @@ using RideShare.Application.UseCaseHandling.Command;
 using RideShare.Application.UseCaseHandling.Query;
 using RideShare.Application.UseCases.Commands.Create;
 using RideShare.Application.UseCases.Commands.Delete;
+using RideShare.Application.UseCases.Commands.Update;
 using RideShare.Application.UseCases.DTOs.Create;
+using RideShare.Application.UseCases.DTOs.Update;
 using RideShare.Application.UseCases.Queries;
 using RideShare.Application.UseCases.Queries.Searches;
 
@@ -71,8 +73,11 @@ namespace RideShare.API.Controllers
         }
         // PUT api/<RideController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] UpdateRide data, [FromServices] IUpdateRideCommand command)
         {
+            data.Id = id;
+            _commandHandler.HandleCommand(command, data);
+            return NoContent();
         }
 
         // DELETE api/<RideController>/5
